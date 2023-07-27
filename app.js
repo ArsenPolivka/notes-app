@@ -1,4 +1,4 @@
-// Sample data - prepopulated notes
+
 const notes = [
 	{
 		id: 1,

@@ -1,13 +1,40 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport"
-				content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Notes app</title>
-</head>
-<body>
-
-</body>
+	<head>
+		<title>Notes App</title>
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+	<div class="container">
+		<h1>Notes App</h1>
+		<div class="notes-table">
+			<table>
+				<thead>
+				<tr>
+					<th>Time of Creation</th>
+					<th>Note Content</th>
+					<th>Note Category</th>
+					<th>Dates Mentioned</th>
+					<th>Actions</th>
+				</tr>
+				</thead>
+				<tbody id="notes-body"></tbody>
+			</table>
+		</div>
+		<div class="summary-table">
+			<h2>Summary</h2>
+			<table>
+				<thead>
+				<tr>
+					<th>Category</th>
+					<th>Active Notes</th>
+					<th>Archived Notes</th>
+				</tr>
+				</thead>
+				<tbody id="summary-body"></tbody>
+			</table>
+		</div>
+	</div>
+	<script type="module" src="./app.js"></script>
+	</body>
 </html>
