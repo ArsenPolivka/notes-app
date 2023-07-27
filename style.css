@@ -1,13 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
 }
 
 .container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
+    padding: 60px 120px;
 }
 
 h1, h2 {
@@ -27,10 +27,28 @@ th, td {
 }
 
 th {
-    background-color: #f2f2f2;
+    background-color: #000;
+    color: #fff;
 }
 
-.actions {
-    display: flex;
-    gap: 8px;
+.notes-table {
+    margin-bottom: 16px;
+}
+
+.button {
+    border: 1px solid #000;
+    background-color: #000;
+    color: #fff;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-out, color 0.2s ease-out;
+}
+
+.button:hover {
+    background-color: #fff;
+    color: #000
+}
+
+.action-button {
+    margin-right: 8px;
 }
