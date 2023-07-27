@@ -5,7 +5,7 @@ import {
 	extractDates
 } from './utils.js';
 
-export const notes = [
+export let notes = [
 	{
 		id: 1,
 		name: 'Groceries',
@@ -64,82 +64,103 @@ export const notes = [
 	},
 ];
 
-export const archivedNotes = [];
+export let archivedNotes = [];
 
 export function addNote() {
-	const name = prompt('Enter your note title:');
-	const content = prompt('Enter your note:');
-	const category = prompt('Enter category (Task, Random Thought, Idea):');
+	try {
+		const name = prompt('Enter your note title:');
+		const content = prompt('Enter your note:');
+		const category = prompt('Enter category (Task, Random Thought, Idea):');
 
-	if (name && content && category) {
-		const dates = extractDates(content);
-		const newNote = {
-			id: notes.length + 1,
-			name,
-			timeOfCreation: new Date().toLocaleString(),
-			content,
-			category,
-			dates
-		};
+		if (name && content && category) {
+			const dates = extractDates(content);
+			const newNote = {
+				id: notes.length + 1,
+				name,
+				timeOfCreation: new Date().toLocaleString(),
+				content,
+				category,
+				dates
+			};
 
-		notes.push(newNote);
-		renderNotes();
-		renderSummary();
+			notes = [...notes, newNote];
+			renderNotes();
+			renderSummary();
+		}
+	} catch (error) {
+		console.error('Error while adding a note:', error);
 	}
 }
 
 export function editNote(noteId) {
-	const note = notes.find((n) => n.id === noteId);
-	if (!note) return;
+	try {
+		const note = notes.find((n) => n.id === noteId);
+		if (!note) return;
 
-	const newName = prompt('Edit your note:', note.name);
-	const newContent = prompt('Edit your note:', note.content);
-	const newCategory = prompt('Edit category (Task, Random Thought, Idea):', note.category);
+		const newName = prompt('Edit your note:', note.name);
+		const newContent = prompt('Edit your note:', note.content);
+		const newCategory = prompt('Edit category (Task, Random Thought, Idea):', note.category);
 
-	if (newContent && newCategory) {
-		const newDates = extractDates(newContent);
-		note.name = newName;
-		note.content = newContent;
-		note.category = newCategory;
-		note.dates = newDates;
+		if (newContent && newCategory) {
+			const newDates = extractDates(newContent);
+			note.name = newName;
+			note.content = newContent;
+			note.category = newCategory;
+			note.dates = newDates;
 
-		renderNotes();
-		renderSummary();
+			renderNotes();
+			renderSummary();
+		}
+	} catch (error) {
+		console.error('Error while editing a note:', error);
 	}
 }
 
 export function archiveNote(noteId) {
-	const note = notes.find((n) => n.id === noteId);
-	const noteIndex = notes.findIndex((n) => n.id === noteId);
-	if (!note) return;
+	try {
+		const note = notes.find((n) => n.id === noteId);
+		const noteIndex = notes.findIndex((n) => n.id === noteId);
+		if (!note) return;
 
-	archivedNotes.push(note);
-	notes.splice(noteIndex, 1);
-	note.archived = true;
+		archivedNotes = [...archivedNotes, note]
+		notes.splice(noteIndex, 1);
+		note.archived = true;
 
-	renderNotes();
-	renderArchivedNotes();
-	renderSummary();
+		renderNotes();
+		renderArchivedNotes();
+		renderSummary();
+	} catch (error) {
+		console.error('Error while archiving a note:', error);
+	}
 }
 
 export function unarchiveNote(noteId) {
-	const note = archivedNotes.find((n) => n.id === noteId);
-	const noteIndex = archivedNotes.findIndex((n) => n.id === noteId);
-	if (!note) return;
+	try {
+		const note = archivedNotes.find((n) => n.id === noteId);
+		const noteIndex = archivedNotes.findIndex((n) => n.id === noteId);
+		if (!note) return;
 
-	note.archived = false;
-	archivedNotes.splice(noteIndex, 1);
-	notes.push(note); // Move the note back to the 'notes' array
-	renderNotes();
-	renderArchivedNotes();
-	renderSummary();
+		note.archived = false;
+		archivedNotes.splice(noteIndex, 1);
+		notes = [...notes, note];
+
+		renderNotes();
+		renderArchivedNotes();
+		renderSummary();
+	} catch (error) {
+		console.error('Error while unarchiving a note:', error);
+	}
 }
 
 export function deleteNote(noteId) {
-	const noteIndex = notes.findIndex((n) => n.id === noteId);
-	if (noteIndex === -1) return;
+	try {
+		const noteIndex = notes.findIndex((n) => n.id === noteId);
+		if (noteIndex === -1) return;
 
-	notes.splice(noteIndex, 1);
-	renderNotes();
-	renderSummary();
+		notes.splice(noteIndex, 1);
+		renderNotes();
+		renderSummary();
+	} catch (error) {
+		console.error('Error while deleting a note:', error);
+	}
 }
